@@ -1,0 +1,17 @@
+class Solution {
+    public long pickGifts(int[] gifts, int k) {
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+        for(int gift : gifts){
+            maxHeap.add(gift);
+        }
+        while(k>0){
+            int max= maxHeap.poll();
+            maxHeap.add((int) Math.sqrt(max));
+            k--;
+        }
+        long count = maxHeap.stream()
+                    .mapToLong(i -> i)
+                    .sum();
+        return count;
+    }
+}
